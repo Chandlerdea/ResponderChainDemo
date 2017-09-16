@@ -83,15 +83,15 @@ class Cell: UITableViewCell {
         ])
     }
     
-    func changeRed(_ sender: UIButton) {
+    @objc func changeRed(_ sender: UIButton) {
         UIApplication.shared.sendAction(#selector(CellDelegate.changeRed(_:)), to: .none, from: self, for: .none)
     }
     
-    func changeGreen(_ sender: UIButton) {
+    @objc func changeGreen(_ sender: UIButton) {
         UIApplication.shared.sendAction(#selector(CellDelegate.changeGreen(_:)), to: .none, from: self, for: .none)
     }
     
-    func changeBlue(_ sender: UIButton) {
+    @objc func changeBlue(_ sender: UIButton) {
         UIApplication.shared.sendAction(#selector(CellDelegate.changeBlue(_:)), to: .none, from: self, for: .none)
     }
     
@@ -118,10 +118,6 @@ class ViewController: UITableViewController, CellDelegate {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
-    }
-    
-    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return self.responds(to: action)
     }
     
     func changeRed(_ cell: Cell) {
