@@ -20,14 +20,12 @@ This isn't necessarily bad, but there are some potential issues.
 
 ### The Responder Chain Way
 
-1. Create a delegate protocol `SomeCellDelegate`
+1. Create a delegate protocol `SomeCellDelegate`. Make sure that the protocol is marked with `@objc`, because we need to use the Objective-C runtime
 2. Make the cell the target of the button
 3. Inside of the button's target method, add this line:
 
-       UIApplication.shared.sendAction(#selector(SomeCellDelegate.doSuff(_:)), to: .none, from: self, for: .none)
-    
+
+		UIApplication.shared.sendAction(#selector(SomeCellDelegate.doSuff(_:)), to: .none, from: self, for: .none)
 4. Make sure the view controller conforms to the delegate
     
 The `sendAction` funtion will cause the system to go up the responder chain, and call `resonds(to:)` on each responder, until the function returns `true`. This solves the potential retain cycle issue, and is overall a more clean solution, using the responder chain as it is meant to be used.
-    
- 
